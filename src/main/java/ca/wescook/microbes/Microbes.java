@@ -1,16 +1,18 @@
-package com.example.examplemod;
+package ca.wescook.microbes;
 
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-@Mod(modid = ExampleMod.MODID, version = ExampleMod.VERSION)
-public class ExampleMod
+import static ca.wescook.microbes.Microbes.*;
+
+@Mod(modid = MODID, name = MODNAME, version = "@VERSION@")
+public class Microbes
 {
-    public static final String MODID = "examplemod";
-    public static final String VERSION = "1.0";
-    
+	public static final String MODID = "microbes";
+	public static final String MODNAME = "Microbes";
+
     @EventHandler
     public void init(FMLInitializationEvent event)
     {

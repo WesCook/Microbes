@@ -1,1 +1,5 @@
+# Blocks
 tile.microbes:microscope.name=Microscope
+
+# Items
+item.microbes:vial.name=Vial

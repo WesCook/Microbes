@@ -4,14 +4,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItems {
-	//public static microscope itemVial;
+	public static ItemVial itemVial;
 
 	public static void registerItems() {
-		//itemVial = new ItemVial();
+		itemVial = new ItemVial();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void renderItems() {
-		//itemVial.render();
+		itemVial.render();
 	}
 }

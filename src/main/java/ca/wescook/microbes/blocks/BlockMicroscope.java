@@ -1,4 +1,4 @@
-package ca.wescook.microbes.items;
+package ca.wescook.microbes.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,18 +21,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMicroscope extends Block {
+public class BlockMicroscope extends Block {
 
 	protected static AxisAlignedBB boundingBox = new AxisAlignedBB(0.315D, 0.0D, 0.25D, 0.622D, 0.581D, 0.624D);
 
-	public ItemMicroscope() {
+	public BlockMicroscope() {
 		super(Material.IRON);
 		setRegistryName("microscope"); // Registration name with Forge
 		setUnlocalizedName(getRegistryName().toString()); // Used for setting language name among other things
 		GameRegistry.register(this); // Register block
 		GameRegistry.register(new ItemBlock(this), getRegistryName()); // Register item drop
 		setCreativeTab(CreativeTabs.TOOLS); // Creative tab
-		this.setSoundType(SoundType.METAL); // Item sound when placing/walking
+		setSoundType(SoundType.METAL); // Item sound when placing/walking
 		setHarvestLevel("pickaxe", 2); // Tool to break with, and its tier
 		setHardness(1.5F); // Breaking speed with pickaxe
 		setResistance(1.0F); // Resistance to explosions

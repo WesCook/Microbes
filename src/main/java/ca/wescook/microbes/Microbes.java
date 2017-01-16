@@ -8,7 +8,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import static ca.wescook.microbes.Microbes.*;
+import static ca.wescook.microbes.Microbes.MODID;
+import static ca.wescook.microbes.Microbes.MODNAME;
 
 @Mod(modid = MODID, name = MODNAME, version = "@VERSION@")
 public class Microbes

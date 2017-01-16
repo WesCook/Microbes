@@ -1,11 +1,11 @@
 package ca.wescook.microbes.blocks;
 
+import ca.wescook.microbes.creativetabs.ModCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -31,7 +31,7 @@ public class BlockMicroscope extends Block {
 		setUnlocalizedName(getRegistryName().toString()); // Used for setting language name among other things
 		GameRegistry.register(this); // Register block
 		GameRegistry.register(new ItemBlock(this), getRegistryName()); // Register item drop
-		setCreativeTab(CreativeTabs.TOOLS); // Creative tab
+		setCreativeTab(ModCreativeTabs.microbesTab); // Creative tab
 		setSoundType(SoundType.METAL); // Item sound when placing/walking
 		setHarvestLevel("pickaxe", 2); // Tool to break with, and its tier
 		setHardness(1.5F); // Breaking speed with pickaxe

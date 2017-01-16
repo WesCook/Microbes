@@ -1,7 +1,7 @@
 package ca.wescook.microbes.items;
 
+import ca.wescook.microbes.creativetabs.ModCreativeTabs;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -13,7 +13,7 @@ public class ItemVial extends Item {
 		setRegistryName("vial");
 		setUnlocalizedName(getRegistryName().toString());
 		GameRegistry.register(this);
-		setCreativeTab(CreativeTabs.TOOLS);
+		setCreativeTab(ModCreativeTabs.microbesTab);
 		setMaxStackSize(16);
 	}
 

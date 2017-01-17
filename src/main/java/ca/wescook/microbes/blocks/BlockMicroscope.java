@@ -23,9 +23,9 @@ import java.util.List;
 
 public class BlockMicroscope extends Block {
 
-	protected static AxisAlignedBB boundingBox = new AxisAlignedBB(0.315D, 0.0D, 0.25D, 0.622D, 0.581D, 0.624D);
+	private static AxisAlignedBB boundingBox = new AxisAlignedBB(0.315D, 0.0D, 0.25D, 0.622D, 0.581D, 0.624D);
 
-	public BlockMicroscope() {
+	BlockMicroscope() {
 		super(Material.IRON);
 		setRegistryName("microscope"); // Registration name with Forge
 		setUnlocalizedName(getRegistryName().toString()); // Used for setting language name among other things
@@ -39,7 +39,7 @@ public class BlockMicroscope extends Block {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void render() {
+	void render() {
 		// Maps item to blockstate json of same name
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}

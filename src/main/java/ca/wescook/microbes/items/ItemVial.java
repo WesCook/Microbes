@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemVial extends Item {
-	public ItemVial() {
+	ItemVial() {
 		setRegistryName("vial");
 		setUnlocalizedName(getRegistryName().toString());
 		GameRegistry.register(this);
@@ -18,7 +18,7 @@ public class ItemVial extends Item {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void render() {
+	void render() {
 		// Maps item to blockstate json of same name
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}

@@ -1,6 +1,7 @@
 package ca.wescook.microbes;
 
 import ca.wescook.microbes.proxy.CommonProxy;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,6 +18,11 @@ public class Microbes
 	// Mod Info
 	public static final String MODID = "microbes";
 	public static final String MODNAME = "Microbes";
+
+	// Enable Universal Bucket
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 
 	// Create instance of proxy
 	// This will vary depending on if the client or server is running

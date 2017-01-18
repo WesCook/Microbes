@@ -4,6 +4,7 @@ import ca.wescook.microbes.blocks.ModBlocks;
 import ca.wescook.microbes.configs.Config;
 import ca.wescook.microbes.crafting.ModCrafting;
 import ca.wescook.microbes.creativetabs.ModCreativeTabs;
+import ca.wescook.microbes.fluids.ModFluids;
 import ca.wescook.microbes.items.ModItems;
 import ca.wescook.microbes.tileentities.ModTileEntities;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -16,6 +17,7 @@ public class CommonProxy {
 		ModCreativeTabs.registerCreativeTabs();
 		ModBlocks.registerBlocks();
 		ModItems.registerItems();
+		ModFluids.registerFluids();
 		ModTileEntities.registerTileEntities();
 	}
 

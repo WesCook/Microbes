@@ -10,6 +10,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,13 +22,16 @@ public class BlockFluidBacteria extends BlockFluidClassic implements ITileEntity
 		setRegistryName("bacteria");
 		setUnlocalizedName(getRegistryName().toString());
 		GameRegistry.register(this);
+		setQuantaPerBlock(1); // Fluid length
 	}
 
+	// Map to blockstate and render the appropriate fluid level
 	@SideOnly(Side.CLIENT)
 	void render() {
 		ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(LEVEL).build());
 	}
 
+	// Connects fluid block to tile entity
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TEBacteria();

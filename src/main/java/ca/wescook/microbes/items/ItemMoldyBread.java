@@ -1,14 +1,14 @@
 package ca.wescook.microbes.items;
 
 import ca.wescook.microbes.creativetabs.ModCreativeTabs;
+import ca.wescook.microbes.entities.EntityMoldyBread;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.stats.AchievementList;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -38,5 +38,19 @@ public class ItemMoldyBread extends ItemFood {
 			// Apply potion effects
 			player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, 3));
 		}
+	}
+
+	// Mark the item as having a custom entity when dropped
+	@Override
+	public boolean hasCustomEntity(ItemStack stack)
+	{
+		return true;
+	}
+
+	// Return a copy of our custom thrown entity
+	@Override
+	public Entity createEntity(World world, Entity entity, ItemStack itemstack)
+	{
+		return new EntityMoldyBread(world, entity, itemstack);
 	}
 }

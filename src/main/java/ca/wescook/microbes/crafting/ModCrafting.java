@@ -24,5 +24,8 @@ public class ModCrafting {
 				" G ",
 				'G', Blocks.GLASS_PANE
 		);
+
+		// Moldy Bread
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.itemMoldyBread), Items.BREAD, Items.WATER_BUCKET);
 	}
 }

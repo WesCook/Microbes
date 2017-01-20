@@ -17,6 +17,10 @@ public class EntityMoldyBread extends EntityItem {
 		lifespan = Integer.MAX_VALUE; // In-world interaction required, so disable despawning
 	}
 
+	public EntityMoldyBread(World worldIn) {
+		super(worldIn);
+	}
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();

@@ -24,6 +24,11 @@ public class Microbes
 		FluidRegistry.enableUniversalBucket();
 	}
 
+	// Create instance of mod
+	// Needed in entity registry
+	@Mod.Instance
+	public static Microbes instance;
+
 	// Create instance of proxy
 	// This will vary depending on if the client or server is running
 	@SidedProxy(clientSide="ca.wescook.microbes.proxy.ClientProxy", serverSide="ca.wescook.microbes.proxy.ServerProxy")

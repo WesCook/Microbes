@@ -4,6 +4,7 @@ import ca.wescook.microbes.blocks.ModBlocks;
 import ca.wescook.microbes.configs.Config;
 import ca.wescook.microbes.crafting.ModCrafting;
 import ca.wescook.microbes.creativetabs.ModCreativeTabs;
+import ca.wescook.microbes.entities.ModEntities;
 import ca.wescook.microbes.fluids.ModFluids;
 import ca.wescook.microbes.items.ModItems;
 import ca.wescook.microbes.tileentities.ModTileEntities;
@@ -19,6 +20,7 @@ public class CommonProxy {
 		ModItems.registerItems();
 		ModFluids.registerFluids();
 		ModTileEntities.registerTileEntities();
+		ModEntities.registerEntities();
 	}
 
 	public void init(FMLInitializationEvent event) {

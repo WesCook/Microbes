@@ -36,8 +36,7 @@ public class ItemMoldyBread extends ItemFood {
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn)
-	{
+	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		if (!worldIn.isRemote)
 		{
 			// Apply potion effects
@@ -54,16 +53,13 @@ public class ItemMoldyBread extends ItemFood {
 
 	// Return a copy of our custom thrown entity
 	@Override
-	public Entity createEntity(World worldIn, Entity entityIn, ItemStack itemStackIn)
-	{
-		if (!worldIn.isRemote)
-			return new EntityMoldyBread(worldIn, entityIn, itemStackIn);
-		return null;
+	public Entity createEntity(World worldIn, Entity entityIn, ItemStack itemStackIn) {
+		return new EntityMoldyBread(worldIn, entityIn, itemStackIn);
 	}
 
 	// Add tooltips
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
-		tooltip.add(I18n.format("tooltip." + Microbes.MODID + ":moldy_bread", TextFormatting.DARK_GRAY)); // Display material tooltip
+		tooltip.add(I18n.format("tooltip." + Microbes.MODID + ":moldy_bread", TextFormatting.DARK_GRAY));
 	}
 }

@@ -2,16 +2,13 @@ package ca.wescook.microbes.fluids;
 
 import ca.wescook.microbes.tileentities.TEBacteria;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,7 +32,9 @@ public class BlockFluidBacteria extends BlockFluidClassic implements ITileEntity
 	// Connects fluid block to tile entity
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TEBacteria();
+		if (!worldIn.isRemote)
+			return new TEBacteria();
+		return null;
 	}
 
 	// Remove TE if broken
@@ -54,12 +53,4 @@ public class BlockFluidBacteria extends BlockFluidClassic implements ITileEntity
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
 	}
-
-	// Don't render TE
-	//@Override
-	//@Deprecated
-	//public EnumBlockRenderType getRenderType(IBlockState state)
-	//{
-	//	return EnumBlockRenderType.INVISIBLE;
-	//}
 }

@@ -31,12 +31,12 @@ public class ItemMoldyBread extends ItemFood {
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
 		if (!worldIn.isRemote)
 		{
 			// Apply potion effects
-			player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, 3));
+			playerIn.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, 3));
 		}
 	}
 
@@ -49,8 +49,10 @@ public class ItemMoldyBread extends ItemFood {
 
 	// Return a copy of our custom thrown entity
 	@Override
-	public Entity createEntity(World world, Entity entity, ItemStack itemstack)
+	public Entity createEntity(World worldIn, Entity entityIn, ItemStack itemStackIn)
 	{
-		return new EntityMoldyBread(world, entity, itemstack);
+		if (!worldIn.isRemote)
+			return new EntityMoldyBread(worldIn, entityIn, itemStackIn);
+		return null;
 	}
 }

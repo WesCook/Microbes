@@ -10,3 +10,6 @@ fluid.bacteria=Bacteria
 
 # Creative Tabs
 itemGroup.microbes=Microbes
+
+#Tooltips
+tooltip.microbes:moldy_bread=Drop in water to create bacteria

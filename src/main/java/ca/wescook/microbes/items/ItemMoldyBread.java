@@ -1,19 +1,24 @@
 package ca.wescook.microbes.items;
 
+import ca.wescook.microbes.Microbes;
 import ca.wescook.microbes.creativetabs.ModCreativeTabs;
 import ca.wescook.microbes.entities.EntityMoldyBread;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemMoldyBread extends ItemFood {
 	ItemMoldyBread(int amount, float saturation, boolean isWolfFood) {
@@ -54,5 +59,11 @@ public class ItemMoldyBread extends ItemFood {
 		if (!worldIn.isRemote)
 			return new EntityMoldyBread(worldIn, entityIn, itemStackIn);
 		return null;
+	}
+
+	// Add tooltips
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+		tooltip.add(I18n.format("tooltip." + Microbes.MODID + ":moldy_bread", TextFormatting.DARK_GRAY)); // Display material tooltip
 	}
 }

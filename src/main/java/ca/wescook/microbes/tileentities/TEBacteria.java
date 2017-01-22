@@ -4,14 +4,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
-import java.util.Random;
-
 public class TEBacteria extends TileEntity implements ITickable {
 
-	private int population;
-	private float growthRate;
-	private int age;
-	private float resistance;
+	public int population;
+	public float growthRate;
+	public int age;
+	public float resistance;
 
 	public TEBacteria() {
 		// Initial property values

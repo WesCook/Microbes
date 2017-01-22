@@ -14,7 +14,6 @@ public class ItemVialFilled extends Item {
 		setUnlocalizedName(getRegistryName().toString());
 		GameRegistry.register(this);
 		setCreativeTab(ModCreativeTabs.microbesTab);
-		setMaxStackSize(16);
 	}
 
 	@SideOnly(Side.CLIENT)

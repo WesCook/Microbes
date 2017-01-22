@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -46,18 +47,28 @@ public class ItemVialEmpty extends Item {
 		if (rayTraceResult != null && rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 			BlockPos blockPos = rayTraceResult.getBlockPos(); // Get block position
-			TEBacteria te = (TEBacteria)worldIn.getTileEntity(blockPos); // Get TileEntity (if it exists)
+			TEBacteria teBacteria = (TEBacteria)worldIn.getTileEntity(blockPos); // Get TileEntity (if it exists)
 
-			if (te != null && te.getBlockType() == ModFluids.blockFluidBacteria) {
-				if (te.population >= 101) { // Requires at least 101, so colony never runs out completely
+			if (teBacteria != null && teBacteria.getBlockType() == ModFluids.blockFluidBacteria) {
+				if (teBacteria.population >= 101) { // Requires at least 101, so colony never runs out completely
+					// Get NBT
+					NBTTagCompound compound = new NBTTagCompound();
+					compound.setInteger("age", teBacteria.age);
+					compound.setFloat("growthRate", teBacteria.growthRate);
+					compound.setFloat("resistance", teBacteria.resistance);
+
+					// Attach NBT to ItemStack
+					ItemStack stack = new ItemStack(ModItems.itemVialFilled);
+					stack.setTagCompound(compound);
+
 					// Extract vial
 					--itemStackIn.stackSize; // Delete item
-					playerIn.inventory.addItemStackToInventory(new ItemStack(ModItems.itemVialFilled, 1)); // Spawn filled vial
-					te.population -= 100; // Reduce population
-					worldIn.playSound(playerIn, blockPos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 0.4F, 1.2F); // Play sound
+					playerIn.inventory.addItemStackToInventory(stack); // Spawn filled vial
+					teBacteria.population -= 100; // Reduce population
+					worldIn.playSound(null, playerIn.getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F); // Play sound
 				}
 				else
-					playerIn.addChatMessage(new TextComponentString("Missing population: " + te.population + "/100 required")); // Not enough population to fill vial
+					playerIn.addChatMessage(new TextComponentString("Missing population: " + teBacteria.population + "/100 required")); // Not enough population to fill vial
 			}
 		}
 		return new ActionResult(EnumActionResult.PASS, itemStackIn);

@@ -2,8 +2,9 @@
 tile.microbes:microscope.name=Microscope
 
 # Items
-item.microbes:vial.name=Vial
 item.microbes:moldy_bread.name=Moldy Bread
+item.microbes:vial_empty.name=Vial
+item.microbes:vial_filled.name=Filled Vial
 
 # Fluids
 fluid.bacteria=Bacteria

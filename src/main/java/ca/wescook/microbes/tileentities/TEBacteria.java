@@ -25,7 +25,7 @@ public class TEBacteria extends TileEntity implements ITickable {
 	public void update() {
 		// Ticking update
 		population += 1; // Population grows steadily over time
-		System.out.println("Population: " + population);
+		//System.out.println("Population: " + population);
 	}
 
 	@Override

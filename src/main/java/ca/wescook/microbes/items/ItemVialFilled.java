@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemVial extends Item {
-	ItemVial() {
-		setRegistryName("vial");
+public class ItemVialFilled extends Item {
+	ItemVialFilled() {
+		setRegistryName("vial_filled");
 		setUnlocalizedName(getRegistryName().toString());
 		GameRegistry.register(this);
 		setCreativeTab(ModCreativeTabs.microbesTab);

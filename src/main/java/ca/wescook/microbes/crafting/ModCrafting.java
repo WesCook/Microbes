@@ -18,7 +18,7 @@ public class ModCrafting {
 		);
 
 		// Vial
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemVial),
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemVialEmpty),
 				"   ",
 				"G G",
 				" G ",

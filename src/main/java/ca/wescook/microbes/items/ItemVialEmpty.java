@@ -50,7 +50,8 @@ public class ItemVialEmpty extends Item {
 			TEBacteria teBacteria = (TEBacteria)worldIn.getTileEntity(blockPos); // Get TileEntity (if it exists)
 
 			if (teBacteria != null && teBacteria.getBlockType() == ModFluids.blockFluidBacteria) {
-				if (teBacteria.population >= 101) { // Requires at least 101, so colony never runs out completely
+				if (teBacteria.population >= 101 || playerIn.isCreative()) { // Requires at least 101, so colony never runs out completely
+
 					// Get NBT
 					NBTTagCompound compound = new NBTTagCompound();
 					compound.setInteger("age", teBacteria.age);
@@ -65,7 +66,8 @@ public class ItemVialEmpty extends Item {
 					// Extract vial
 					--itemStackIn.stackSize; // Delete item
 					playerIn.inventory.addItemStackToInventory(stack); // Spawn filled vial
-					teBacteria.population -= 100; // Reduce population
+					if (!playerIn.isCreative())
+						teBacteria.population -= 100; // Reduce population
 					worldIn.playSound(null, playerIn.getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F); // Play sound
 				}
 				else

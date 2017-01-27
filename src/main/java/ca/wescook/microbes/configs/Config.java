@@ -21,9 +21,11 @@ public class Config {
 		// Get Values
 		bacteriaSpreading = configFile.getBoolean("bacteriaSpreading", CATEGORY_GENERAL, true, "Should bacteria spread to neighboring blocks?");
 		rawCatalystData = configFile.get("catalysts", "catalysts", new String[]{
-				"minecraft:dye:15    growthrate  2",
-				"minecraft:soul_sand growthrate -2"
-		}, "List of catalysts and their effects on bacteria growth:  [modid:item:metadata] [property] [value]");
+			"microbes:moldy_bread  population  100",
+			"minecraft:dye:15      growthrate    2",
+			"minecraft:soul_sand   growthrate   -2"
+		}, "List of catalysts and their effects on bacteria growth:  [modid:item:metadata] [property] [value]" +
+			"\nAccepted properties: population, growthrate, resistance");
 
 		// Update file
 		if (configFile.hasChanged())

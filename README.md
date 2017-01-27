@@ -42,8 +42,8 @@ These global properties describe how the colony itself acts.
 
 * Population - Determines how quickly microbes will grow.  It doubles approximately every 30 seconds, modified by growth rate.
 * Growth Rate - How often the microbes multiply.  As if these things weren't dangerous enough.
-* Age - The number of tiles this bacteria has spread to.  It can also be thought of as "generations", but on a larger scale.
 * Resistance - How resistance to random mutation the microbes are, as well their influence by catalysts.  Useful in farming larger colonies.
+* Age - The number of tiles this bacteria has spread to.  It can also be thought of as "generations", but on a larger scale.
 
 ### Catalysts
 
@@ -60,7 +60,9 @@ Catalysts influence the traits or properties of a colony.  They're more effectiv
 
 ###### Properties
 
-* Bone Meal - Increases *Growth Rate*.
-* Soul Sand - Decreases *Growth Rate*.
+* Moldy bread - Increases *Population* by 100
+* Hand Sanitizer - Resets *Population* to 1
+* Bone Meal - Increases *Growth Rate* by 2
+* Soul Sand - Decreases *Growth Rate* by 2
 
 Additional catalysts can be defined in the config file.

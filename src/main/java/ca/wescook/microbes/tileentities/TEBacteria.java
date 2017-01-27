@@ -2,6 +2,7 @@ package ca.wescook.microbes.tileentities;
 
 import ca.wescook.microbes.configs.Catalyst;
 import ca.wescook.microbes.configs.CatalystData;
+import ca.wescook.microbes.utilities.UsefulMath;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -39,19 +40,33 @@ public class TEBacteria extends TileEntity implements ITickable {
 		if (!worldObj.isRemote) {
 			// Look for catalysts in bacteria
 			List<EntityItem> entityItemsFound = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))); // Get item list from bacteria pool
-			EntityItem entityItem = entityItemsFound.get(0); // Get first item from list
-			Catalyst catalyst = CatalystData.find(entityItem.getEntityItem()); // Fetch catalyst from ItemStack if available, return null if not
 
-			// Act on items
-			if (catalyst != null) { // Accept and consume item
-				System.out.println(catalyst.itemStack.getDisplayName() + " modifies " + catalyst.property + " by " + catalyst.amount);
-				--entityItem.getEntityItem().stackSize; // Remove one from stack size until gone
-			} else
-				entityItem.addVelocity(worldObj.rand.nextGaussian() * 0.13D, 0.6D, worldObj.rand.nextGaussian() * 0.13D); // Eject item from bacteria
+			if (entityItemsFound.size() > 0) {
+				EntityItem entityItem = entityItemsFound.get(0); // Get first item from list
+				Catalyst catalyst = CatalystData.find(entityItem.getEntityItem()); // Fetch catalyst from ItemStack if available, return null if not
+
+				// Act on items
+				if (catalyst != null) {
+					// Apply effect from catalyst
+					applyCatalyst(catalyst);
+
+					// Remove one from stack size until gone
+					--entityItem.getEntityItem().stackSize;
+				} else
+					entityItem.addVelocity(worldObj.rand.nextGaussian() * 0.13D, 0.6D, worldObj.rand.nextGaussian() * 0.13D); // Eject item from bacteria
+			}
 
 			// Population doubles each update, up to its limit
 			if (population < 1000)
 				population = Math.min(population * 2, 1000);
+		}
+	}
+
+	private void applyCatalyst(Catalyst catalyst) {
+		switch(catalyst.property) {
+			case "population": population = UsefulMath.range(1, population + catalyst.amount, 1000); break;
+			case "growthrate": growthRate = UsefulMath.range(1, growthRate + catalyst.amount, 10); break;
+			case "resistance": resistance = UsefulMath.range(1, resistance + catalyst.amount, 10); break;
 		}
 	}
 

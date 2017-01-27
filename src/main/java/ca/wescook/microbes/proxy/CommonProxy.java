@@ -1,6 +1,7 @@
 package ca.wescook.microbes.proxy;
 
 import ca.wescook.microbes.blocks.ModBlocks;
+import ca.wescook.microbes.configs.CatalystData;
 import ca.wescook.microbes.configs.Config;
 import ca.wescook.microbes.crafting.ModCrafting;
 import ca.wescook.microbes.creativetabs.ModCreativeTabs;
@@ -28,5 +29,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
+		CatalystData.parse();
 	}
 }

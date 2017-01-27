@@ -27,9 +27,11 @@ public class EntityMoldyBread extends EntityItem {
 		super.onUpdate();
 
 		// When thrown in water, randomly replace water source with bacteria
-		if (worldObj.getBlockState(getPosition()) == Blocks.WATER.getDefaultState().withProperty(LEVEL, 0) && rand.nextInt(500) == 0) { // If in water source block
-			worldObj.setBlockState(getPosition(), ModFluids.blockFluidBacteria.getDefaultState()); // Set bacteria block
-			setDead(); // Destroy moldy bread
+		if (!worldObj.isRemote) {
+			if (worldObj.getBlockState(getPosition()) == Blocks.WATER.getDefaultState().withProperty(LEVEL, 0) && rand.nextInt(500) == 0) { // If in water source block
+				worldObj.setBlockState(getPosition(), ModFluids.blockFluidBacteria.getDefaultState()); // Set bacteria block
+				--getEntityItem().stackSize; // Destroy moldy bread
+			}
 		}
 	}
 }

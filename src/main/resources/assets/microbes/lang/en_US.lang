@@ -2,6 +2,7 @@
 tile.microbes:microscope.name=Microscope
 
 # Items
+item.microbes:magnifying_glass.name=Magnifying Glass
 item.microbes:moldy_bread.name=Moldy Bread
 item.microbes:vial_empty.name=Vial
 item.microbes:vial_filled.name=Filled Vial
@@ -12,5 +13,10 @@ fluid.bacteria=Bacteria
 # Creative Tabs
 itemGroup.microbes=Microbes
 
-#Tooltips
+# Tooltips
+tooltip.microbes:magnifying_glass=Examine a bacteria colony's population
 tooltip.microbes:moldy_bread=Drop in water to create bacteria
+
+# Messages
+message.microbes:population_update=Population:
+message.microbes:missing_population=Not enough population

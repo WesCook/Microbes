@@ -23,7 +23,7 @@ import java.util.List;
 
 public class BlockMicroscope extends Block {
 
-	private static AxisAlignedBB boundingBox = new AxisAlignedBB(0.315D, 0.0D, 0.25D, 0.622D, 0.581D, 0.624D);
+	private static final AxisAlignedBB boundingBox = new AxisAlignedBB(0.315D, 0.0D, 0.25D, 0.622D, 0.581D, 0.624D);
 
 	BlockMicroscope() {
 		super(Material.IRON);

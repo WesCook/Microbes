@@ -59,7 +59,7 @@ public class ItemMoldyBread extends ItemFood {
 
 	// Add tooltips
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+	public void addInformation(ItemStack itemStackIn, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		tooltip.add(I18n.format("tooltip." + Microbes.MODID + ":moldy_bread", TextFormatting.DARK_GRAY));
 	}
 }

@@ -16,6 +16,8 @@ itemGroup.microbes=Microbes
 # Tooltips
 tooltip.microbes:magnifying_glass=Examine a bacteria colony's population
 tooltip.microbes:moldy_bread=Drop in water to create bacteria
+tooltip.microbes:vial_filled_traits_missing=It doesn't appear to do anything...
+tooltip.microbes:vial_filled_traits_header=Traits:
 
 # Messages
 message.microbes:population_update=Population:

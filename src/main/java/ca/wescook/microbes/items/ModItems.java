@@ -13,7 +13,7 @@ public class ModItems {
 		itemMagnifyingGlass = new ItemMagnifyingGlass();
 		itemMoldyBread = new ItemMoldyBread(4, 0.5F, false);
 		itemVialEmpty = new ItemVialEmpty();
-		itemVialFilled = new ItemVialFilled();
+		itemVialFilled = new ItemVialFilled(0, 0F, false);
 	}
 
 	@SideOnly(Side.CLIENT)

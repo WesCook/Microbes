@@ -14,62 +14,85 @@ import java.util.Map;
 
 public class TEBacteria extends TileEntity implements ITickable {
 
+	// Based on growth rate, how often the tile updates
+	private long delay;
+
 	// Properties/Traits
 	public int population;
-	public float growthRate;
+	public int growthRate;
+	public int resistance;
 	public int age;
-	public float resistance;
 	public NBTTagCompound traits;
 
 	public TEBacteria() {
 		// Initial property values
 		population = 1;
-		growthRate = 1.0F;
+		growthRate = 0;
+		resistance = 0;
 		age = 1;
-		resistance = 1.0F;
 		traits = new NBTTagCompound();
+		calculateDelay();
 	}
 
 	@Override
 	public void update() {
 
-		// Bail out if not a valid tick
-		if (worldObj.getTotalWorldTime() % (20 * 10 * growthRate) != 0) // Default: 10 seconds
+		// Only run on server
+		if (worldObj.isRemote)
 			return;
 
-		// Detect catalysts
-		if (!worldObj.isRemote) {
-			// Look for catalysts in bacteria
-			List<EntityItem> entityItemsFound = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))); // Get item list from bacteria pool
+		// Bail out if not a valid tick
+		if (worldObj.getTotalWorldTime() % delay != 0)
+			return;
 
-			if (entityItemsFound.size() > 0) {
-				EntityItem entityItem = entityItemsFound.get(0); // Get first item from list
-				Catalyst catalyst = CatalystData.find(entityItem.getEntityItem()); // Fetch catalyst from ItemStack if available, return null if not
+		// Look for catalysts in bacteria
+		List<EntityItem> entityItemsFound = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))); // Get item list from bacteria pool
 
-				// Act on items
-				if (catalyst != null) {
-					// Loop through effects from this catalyst
-					for (Map.Entry<String, Integer> entry : catalyst.effects.entrySet())
-						applyCatalystEffect(entry.getKey(), entry.getValue());
+		if (entityItemsFound.size() > 0) {
+			EntityItem entityItem = entityItemsFound.get(0); // Get first item from list
+			Catalyst catalyst = CatalystData.find(entityItem.getEntityItem()); // Fetch catalyst from ItemStack if available, return null if not
 
-					// Remove one from stack size until gone
-					--entityItem.getEntityItem().stackSize;
-				} else
-					entityItem.addVelocity(worldObj.rand.nextGaussian() * 0.13D, 0.6D, worldObj.rand.nextGaussian() * 0.13D); // Eject item from bacteria
-			}
+			// Act on items
+			if (catalyst != null) {
+				// Loop through effects from this catalyst
+				for (Map.Entry<String, Integer> entry : catalyst.effects.entrySet())
+					applyCatalystEffect(entry.getKey(), entry.getValue());
 
-			// Population doubles each update, up to its limit
-			if (population < 1000)
-				population = Math.min(population * 2, 1000);
+				// Remove one from stack size until gone
+				--entityItem.getEntityItem().stackSize;
+			} else
+				entityItem.addVelocity(worldObj.rand.nextGaussian() * 0.13D, 0.6D, worldObj.rand.nextGaussian() * 0.13D); // Eject item from bacteria
 		}
+
+		// Population doubles each update, up to its limit
+		if (population < 1000)
+			population = Math.min(population * 2, 1000);
 	}
 
 	private void applyCatalystEffect(String property, int amount) {
 		switch(property) {
 			case "population": population = UsefulMath.range(1, population + amount, 1000); break;
-			case "growthrate": growthRate = UsefulMath.range(1, growthRate + amount, 10); break;
-			case "resistance": resistance = UsefulMath.range(1, resistance + amount, 10); break;
+			case "growthrate": growthRate = UsefulMath.range(-100, growthRate + amount, 100); calculateDelay(); break;
+			case "resistance": resistance = UsefulMath.range(-100, resistance + amount, 100); break;
 		}
+	}
+
+	private void calculateDelay() {
+		/*
+		Calculating slope - linear scaling
+		x: -100, 100   (config limits)
+		y:   40, 1000  (tick limits)
+		slope  = (y2 - y1) / (x2 - x1)  == 4.8
+		offset = (slope * x1) + n = y1  == 520
+		delay = (growthRate * 4.8) + 520
+
+		Calculating least squares fit - exponential scaling
+		https://www.wolframalpha.com/input/?i=(-100,+40),+(0,+200),+(100,+1000)+exponential+fit
+		delay = Math.round(200 * Math.exp(0.0160944 * (growthRate * -1)))
+		delay = Math.round(200 * Math.pow(2, 0.0232193 * (growthRate * -1)))
+		*/
+
+		this.delay = Math.round(200 * Math.exp(0.0160944 * (growthRate * -1)));
 	}
 
 	@Override
@@ -78,9 +101,9 @@ public class TEBacteria extends TileEntity implements ITickable {
 
 		// Get bacteria properties
 		population = compound.getInteger("population");
-		growthRate = compound.getFloat("growthRate");
+		growthRate = compound.getInteger("growthRate");
+		resistance = compound.getInteger("resistance");
 		age = compound.getInteger("age");
-		resistance = compound.getFloat("resistance");
 		traits = compound.getCompoundTag("traits");
 	}
 
@@ -91,8 +114,8 @@ public class TEBacteria extends TileEntity implements ITickable {
 		// Set bacteria properties
 		compound.setInteger("population", population);
 		compound.setFloat("growthRate", growthRate);
+		compound.setInteger("resistance", resistance);
 		compound.setInteger("age", age);
-		compound.setFloat("resistance", resistance);
 		compound.setTag("traits", traits);
 		return compound;
 	}

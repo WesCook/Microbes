@@ -57,8 +57,8 @@ public class ItemVialEmpty extends Item {
 					// Get NBT
 					NBTTagCompound compound = new NBTTagCompound();
 					compound.setInteger("age", teBacteria.age);
-					compound.setFloat("growthRate", teBacteria.growthRate);
-					compound.setFloat("resistance", teBacteria.resistance);
+					compound.setInteger("growthRate", teBacteria.growthRate);
+					compound.setInteger("resistance", teBacteria.resistance);
 					compound.setTag("traits", teBacteria.traits);
 
 					// Attach NBT to ItemStack

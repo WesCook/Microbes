@@ -45,8 +45,7 @@ public class ItemVialFilled extends ItemFood {
 	}
 
 	// Drink, don't eat
-	public EnumAction getItemUseAction(ItemStack stack)
-	{
+	public EnumAction getItemUseAction(ItemStack itemStackIn) {
 		return EnumAction.DRINK;
 	}
 

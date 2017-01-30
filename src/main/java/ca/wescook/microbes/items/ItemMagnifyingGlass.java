@@ -49,7 +49,7 @@ public class ItemMagnifyingGlass extends Item {
 			TEBacteria teBacteria = (TEBacteria) worldIn.getTileEntity(blockPos); // Get TileEntity (if it exists)
 
 			if (teBacteria != null && teBacteria.getBlockType() == ModFluids.blockFluidBacteria) {
-				playerIn.addChatMessage(new TextComponentString(I18n.format("message." + Microbes.MODID + ":population_update") +  + teBacteria.population)); // Not enough population to fill vial
+				playerIn.addChatMessage(new TextComponentString(I18n.format("message." + Microbes.MODID + ":population_update") + " " + teBacteria.population)); // Not enough population to fill vial
 				return new ActionResult(EnumActionResult.PASS, itemStackIn);
 			}
 		}

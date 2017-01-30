@@ -10,6 +10,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
+import java.util.Map;
 
 public class TEBacteria extends TileEntity implements ITickable {
 
@@ -47,8 +48,9 @@ public class TEBacteria extends TileEntity implements ITickable {
 
 				// Act on items
 				if (catalyst != null) {
-					// Apply effect from catalyst
-					applyCatalyst(catalyst);
+					// Loop through effects from this catalyst
+					for (Map.Entry<String, Integer> entry : catalyst.effects.entrySet())
+						applyCatalystEffect(entry.getKey(), entry.getValue());
 
 					// Remove one from stack size until gone
 					--entityItem.getEntityItem().stackSize;
@@ -62,11 +64,11 @@ public class TEBacteria extends TileEntity implements ITickable {
 		}
 	}
 
-	private void applyCatalyst(Catalyst catalyst) {
-		switch(catalyst.property) {
-			case "population": population = UsefulMath.range(1, population + catalyst.amount, 1000); break;
-			case "growthrate": growthRate = UsefulMath.range(1, growthRate + catalyst.amount, 10); break;
-			case "resistance": resistance = UsefulMath.range(1, resistance + catalyst.amount, 10); break;
+	private void applyCatalystEffect(String property, int amount) {
+		switch(property) {
+			case "population": population = UsefulMath.range(1, population + amount, 1000); break;
+			case "growthrate": growthRate = UsefulMath.range(1, growthRate + amount, 10); break;
+			case "resistance": resistance = UsefulMath.range(1, resistance + amount, 10); break;
 		}
 	}
 

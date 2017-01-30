@@ -19,6 +19,9 @@ public class Microbes
 	public static final String MODID = "microbes";
 	public static final String MODNAME = "Microbes";
 
+	// Mod Constants
+	public static final String[] traits = {"acidic", "coagulant", "combustible"};
+
 	// Enable Universal Bucket
 	static {
 		FluidRegistry.enableUniversalBucket();

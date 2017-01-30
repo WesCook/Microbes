@@ -24,15 +24,25 @@ public class CatalystData {
 			Matcher regexResult = compiledRegex.matcher(entry);
 			if (regexResult.matches()) {
 
-				// Clean data
+				// Clean up data from regex
 				String itemName = regexResult.group(1) + ":" + regexResult.group(2); // Form item name (eg. minecraft:dye)
+				Item item = Item.getByNameOrId(itemName); // Get Item object from string name
 				int metadata = regexResult.group(3) != null ? Integer.valueOf(regexResult.group(3).substring(1)) : 0; // Clean metadata (:15 > 15) and set to 0 if null
-				ItemStack itemStack = new ItemStack(Item.getByNameOrId(itemName), 0, metadata); // Create ItemStack from name and metadata
-				String property = regexResult.group(4); // eg. growthrate
-				int amount = Integer.valueOf(regexResult.group(5)); // eg. -5
+				ItemStack itemStack = new ItemStack(item, 0, metadata); // Create ItemStack from name and metadata
+				String property = regexResult.group(4); // Property to affect  eg. growthrate
+				int amount = Integer.valueOf(regexResult.group(5)); // Amount to affect property.  eg. -5
 
-				// Create catalysts and add to list
-				catalysts.add(new Catalyst(itemStack, property, amount));
+				// Create new catalyst entry if it doesn't exist
+				Catalyst catalyst = CatalystData.find(itemStack); // Return catalyst from list
+				if (catalyst == null) { // If not in list
+					catalyst = new Catalyst(itemStack); // Create new catalyst
+					catalysts.add(catalyst); // Add to list
+				}
+
+				// Add effect to catalyst
+				int index = catalysts.indexOf(catalyst); // Get the index
+				catalyst.effects.put(property, amount); // Update catalyst with new effect
+				catalysts.set(index, catalyst); // Add back to list
 			}
 		}
 	}
@@ -40,7 +50,7 @@ public class CatalystData {
 	// Accept ItemStack, return full catalyst data if found
 	public static Catalyst find(ItemStack itemStack) {
 		for (Catalyst catalyst : catalysts)
-			if (catalyst.itemStack.isItemEqual(itemStack)) // TODO: Queue up multiple items
+			if (catalyst.itemStack.isItemEqual(itemStack))
 				return catalyst;
 
 		return null;

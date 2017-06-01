@@ -1,0 +1,24 @@
+# Blocks
+tile.microbes:microscope.name=Mikroskop
+
+# Items
+item.microbes:magnifying_glass.name=Lupe
+item.microbes:moldy_bread.name=Schimmeliges Brot
+item.microbes:vial_empty.name=Fläschchen
+item.microbes:vial_filled.name=Gefülltes Fläschchen
+
+# Fluids
+fluid.bacteria=Bakterien
+
+# Creative Tabs
+itemGroup.microbes=Mikroben
+
+# Tooltips
+tooltip.microbes:magnifying_glass=Untersuche die Bevölkerung einer Bakterienkolonie
+tooltip.microbes:moldy_bread=In Wasser fallen lassen, um Bakterien zu erschaffen
+tooltip.microbes:vial_filled_traits_missing=Es scheint sich nichts zu tun...
+tooltip.microbes:vial_filled_traits_header=Eigenschaften:
+
+# Messages
+message.microbes:population_update=Population:
+message.microbes:missing_population=Ungenügende Population
